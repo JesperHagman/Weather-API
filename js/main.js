@@ -2,31 +2,29 @@
 
 
 
-let city          = document.getElementById("city")
-let contentDiv    = document.getElementById('content')
 let measurementType = document.querySelector('.measurement');
-let celsius       = "°"
-let fahrenheit    = "°F"
+let contentDiv      = document.getElementById('content')
+let city            = document.getElementById("city")
+let celsius         = "°"
+let fahrenheit      = "°F"
 
 
 city.addEventListener("change", fetchData)
 measurementType.addEventListener('change', changeMeasurementType)
 
-async function fetchData(event) {
+async function fetchData() {
     try {
-        if (event.target.value == "imperial"){
-            let response = await fetch(`http://api.openweathermap.org/data/2.5/find?q=${city.value}&units=imperial&appid=4423845cee6ed32c6e6b2e17f19bbdc9`)
-        } else{
-            let response = await fetch(`http://api.openweathermap.org/data/2.5/find?q=${city.value}&units=metric&appid=4423845cee6ed32c6e6b2e17f19bbdc9`)  
-        }
+        let response = await fetch(`http://api.openweathermap.org/data/2.5/find?q=${city.value}&units=metric&appid=4423845cee6ed32c6e6b2e17f19bbdc9`)
         let data = await response.json()
         console.log(data)
 
         getWeatherFromData(data)
 
-        changeMeasurementType(event)
+        changeMeasurementType(e)
+
+      
     } catch(error) {
-       /*  contentDiv.innerHTML += "please double check your spelling. We apologize for the inconvenience" */
+        contentDiv.innerHTML += "please double check your spelling. We apologize for the inconvenience"
     }
 }
 
@@ -42,15 +40,18 @@ function getWeatherFromData(data) {
     `
 }
 
-function changeMeasurementType (event) {
+function changeMeasurementType (e) {
 
 
-    let result = document.querySelector('.result');
-    /* result.textContent = `${event.target.value}`;
+    let result = document.querySelector('#content');
+    result.innerHTML = `${e.target.value}`;
+
+    result.textContent = `${e.target.value}`;
+        if (e.target.value == "imperial") {
+            result.textContent += " Jag har löst det tror jag"
+        
+          }
   
   
-    if (event.target.value == "metric") {
-      result.textContent += " Jag har löst det tror jag"
-  
-    } */
+    
 }
