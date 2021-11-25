@@ -5,9 +5,6 @@
 let measurementType = document.querySelector('.measurement');
 let contentDiv      = document.getElementById('content')
 let city            = document.getElementById("city")
-let celsius         = "°"
-let fahrenheit      = "°F"
-
 
 city.addEventListener("change", fetchData)
 measurementType.addEventListener('change', changeMeasurementType)
@@ -42,6 +39,6 @@ function getWeatherFromData(data) {
 function changeMeasurementType (event) {
     unit = `${event.target.value}`;
     
-    contentDiv.textContent += `You like ${event.target.value}`;
+   /*  contentDiv.textContent += `You like ${event.target.value}`; */
     
 }
