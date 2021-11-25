@@ -9,9 +9,15 @@
 </head>
 <body>
     <input type="text" id="city" placeholder="Please put in a City">
-    <input type="checkbox" onclick="checkFluency()"  id="fluency" checked />
-    <div id="content"></div>
-
+    
+    <label>Choose the measurement type:
+        <select class="measurement" name="measurement">
+          <option value="">Select One …</option>
+          <option value="metric">Metric</option>
+          <option value="imperial">Imperial</option>
+        </select>
+      </label>
+      
 
     <script src="js/main.js"></script>
 </body>

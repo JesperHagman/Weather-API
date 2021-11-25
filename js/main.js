@@ -2,22 +2,31 @@
 
 
 
-let city       = document.getElementById("city")
-let contentDiv = document.getElementById('content')
-let celsius    = "°"
-let fahrenheit = "°F"
+let city          = document.getElementById("city")
+let contentDiv    = document.getElementById('content')
+let measurementType = document.querySelector('.measurement');
+let celsius       = "°"
+let fahrenheit    = "°F"
+
 
 city.addEventListener("change", fetchData)
+measurementType.addEventListener('change', changeMeasurementType)
 
-async function fetchData() {
+async function fetchData(event) {
     try {
-        let response = await fetch(`http://api.openweathermap.org/data/2.5/find?q=${city.value}&units=metric&appid=4423845cee6ed32c6e6b2e17f19bbdc9`)
+        if (event.target.value == "imperial"){
+            let response = await fetch(`http://api.openweathermap.org/data/2.5/find?q=${city.value}&units=imperial&appid=4423845cee6ed32c6e6b2e17f19bbdc9`)
+        } else{
+            let response = await fetch(`http://api.openweathermap.org/data/2.5/find?q=${city.value}&units=metric&appid=4423845cee6ed32c6e6b2e17f19bbdc9`)  
+        }
         let data = await response.json()
         console.log(data)
 
         getWeatherFromData(data)
+
+        changeMeasurementType(event)
     } catch(error) {
-        contentDiv.innerHTML += "please double check your spelling. We apologize for the inconvenience"
+       /*  contentDiv.innerHTML += "please double check your spelling. We apologize for the inconvenience" */
     }
 }
 
@@ -33,11 +42,15 @@ function getWeatherFromData(data) {
     `
 }
 
-function checkFluency()
-{
-  var checkbox = document.getElementById('fluency');
-  if (checkbox.checked != true)
-  {
-    alert("you need to be fluent in English to apply for the job");
-  }
+function changeMeasurementType (event) {
+
+
+    let result = document.querySelector('.result');
+    /* result.textContent = `${event.target.value}`;
+  
+  
+    if (event.target.value == "metric") {
+      result.textContent += " Jag har löst det tror jag"
+  
+    } */
 }
