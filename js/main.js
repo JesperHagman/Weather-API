@@ -1,7 +1,5 @@
 // my API key: 4423845cee6ed32c6e6b2e17f19bbdc9
 
-
-
 let measurementType = document.getElementById('measurement');
 let contentDiv      = document.getElementById('content')
 let city            = document.getElementById("city")
@@ -21,11 +19,12 @@ function changeMeasurementType() {
     return location
 }
  */
-async function fetchData() {
+async function fetchData(location) {
     if (changeMeasurementType() == "imperial") {
         return (await (fetch `http://api.openweathermap.org/data/2.5/find?q=${location}&units=imperial&appid=4423845cee6ed32c6e6b2e17f19bbdc9`)).json()
     }else if (changeMeasurementType() == "metric"){
-        return (await (fetch `http://api.openweathermap.org/data/2.5/find?q=${location}&units=metric&appid=4423845cee6ed32c6e6b2e17f19bbdc9`)).json()
+        console.log(location)
+        return (await (fetch `http://api.openweathermap.org/data/2.5/find?q=s&units=metric&appid=4423845cee6ed32c6e6b2e17f19bbdc9`)).json()
     } else {
         return (await (fetch `http://api.openweathermap.org/data/2.5/find?q=${location}&appid=4423845cee6ed32c6e6b2e17f19bbdc9`)).json()
     }
@@ -34,10 +33,10 @@ async function fetchData() {
 
 async function getWeatherFromData() {
     let data = []
-    /* let location = city.value
-    console.log(location) */
+    let location = city.value
+    console.log(location)
     try {
-        data = await fetchData()
+        data = await fetchData(location)
         contentDiv.innerHTML += `
         <article>
         <h2>The weather in ${data.list[0].name}:</h2>
