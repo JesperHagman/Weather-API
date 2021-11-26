@@ -16,22 +16,26 @@ function changeMeasurementType() {
     return unitType
 }
 
-function getInputValueFromCity() {
+/* function getInputValueFromCity() {
     let location = city.value
     return location
 }
-
+ */
 async function fetchData() {
     if (changeMeasurementType() == "imperial") {
-        return (await (fetch `http://api.openweathermap.org/data/2.5/find?q=${getInputValueFromCity}&units=imperial&appid=4423845cee6ed32c6e6b2e17f19bbdc9`)).json()
-    }else {
-        return (await (fetch `http://api.openweathermap.org/data/2.5/find?q=${getInputValueFromCity}&units=metric&appid=4423845cee6ed32c6e6b2e17f19bbdc9`)).json()
+        return (await (fetch `http://api.openweathermap.org/data/2.5/find?q=${location}&units=imperial&appid=4423845cee6ed32c6e6b2e17f19bbdc9`)).json()
+    }else if (changeMeasurementType() == "metric"){
+        return (await (fetch `http://api.openweathermap.org/data/2.5/find?q=${location}&units=metric&appid=4423845cee6ed32c6e6b2e17f19bbdc9`)).json()
+    } else {
+        return (await (fetch `http://api.openweathermap.org/data/2.5/find?q=${location}&appid=4423845cee6ed32c6e6b2e17f19bbdc9`)).json()
     }
 } 
 
 
 async function getWeatherFromData() {
     let data = []
+    /* let location = city.value
+    console.log(location) */
     try {
         data = await fetchData()
         contentDiv.innerHTML += `
