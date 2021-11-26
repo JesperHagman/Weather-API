@@ -9,19 +9,19 @@ let city            = document.getElementById("city")
 city.addEventListener("change", getWeatherFromData)
 measurementType.addEventListener('change', changeMeasurementType)
 
-function changeMeasurementType(unitType) {
+function changeMeasurementType() {
     unitType = measurementType.value
     console.log(unitType)
     return unitType
 }
 
-async function fetchData(unitType) {
-    if (unitType == "imperial") {
+async function fetchData() {
+    if (changeMeasurementType() == "imperial") {
         return (await (fetch`http://api.openweathermap.org/data/2.5/find?q=kalmar&units=imperial&appid=4423845cee6ed32c6e6b2e17f19bbdc9`)).json()
     }else {
         return (await (fetch`http://api.openweathermap.org/data/2.5/find?q=kalmar&units=metric&appid=4423845cee6ed32c6e6b2e17f19bbdc9`)).json()
     }
-    } 
+} 
 
 
 async function getWeatherFromData() {
