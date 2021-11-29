@@ -5,8 +5,6 @@ let contentDiv      = document.getElementById('content')
 let city            = document.getElementById("city")
 
 city.addEventListener("change", getWeatherFromData)
-
-
 measurementType.addEventListener('change', changeMeasurementType)
 
 function changeMeasurementType() {
@@ -14,7 +12,6 @@ function changeMeasurementType() {
     console.log(unitType)
     return unitType
 }
-
 async function fetchData(location) {
 
    if (changeMeasurementType() == "metric") {
@@ -30,10 +27,7 @@ async function fetchData(location) {
         let data = await response.json();
         return data
     }
-
 }
-
-
 async function getWeatherFromData() {
     let data = []
     let location = city.value
