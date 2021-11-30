@@ -26,7 +26,7 @@ async function fetchData(location) {
         return data
     }
 }
-async function getWeatherFromData(temp) {
+async function getWeatherFromData() {
     let data = []
     let location = city.value
     try {
@@ -41,7 +41,6 @@ async function getWeatherFromData(temp) {
         <p>There will be ${data.list[0].weather[0].description}</p>
         </article>
         `
-        temp = Math.round(data.list[0].main.temp)
     }catch(error) {
         console.log(error)
         contentDiv.innerHTML = `<p>${location} is an invalid search! Please try again</p>`
@@ -50,11 +49,4 @@ async function getWeatherFromData(temp) {
 function clearText() {
     city.value = onfocus = this.value = ""
     contentDiv.innerHTML = ""
-}
-
-function changeImg(temp){
-    if (temp <= 0) {
-
-    }
-    
 }
