@@ -7,9 +7,17 @@ let city            = document.getElementById("city")
 city.addEventListener("change", getWeatherFromData)
 measurementType.addEventListener('change', changeMeasurementType)
 
-function changeMeasurementType() {
-    unitType = measurementType.value
-    return unitType
+async function getWeatherFromData(data) {
+    data = []
+    let location = city.value
+    try {
+        data = await fetchData(location)
+        clearText()
+        printOutcomeFromData(data)
+    }catch(error) {
+        console.log(error)
+        contentDiv.innerHTML = `<p>${location} is an invalid search! Please try again</p>`
+    }
 }
 async function fetchData(location) {
    if (changeMeasurementType() == "metric") {
@@ -26,13 +34,8 @@ async function fetchData(location) {
         return data
     }
 }
-async function getWeatherFromData() {
-    let data = []
-    let location = city.value
-    try {
-        data = await fetchData(location)
-        clearText()
-        contentDiv.innerHTML = `
+function printOutcomeFromData(data){
+    contentDiv.innerHTML = `
         <article>
         <h2>The weather in ${data.list[0].name}:</h2>
         <p>The local forecast says it's ${Math.round(data.list[0].main.temp)}° 
@@ -41,10 +44,10 @@ async function getWeatherFromData() {
         <p>There will be ${data.list[0].weather[0].description}</p>
         </article>
         `
-    }catch(error) {
-        console.log(error)
-        contentDiv.innerHTML = `<p>${location} is an invalid search! Please try again</p>`
-    }
+}
+function changeMeasurementType() {
+    unitType = measurementType.value
+    return unitType
 }
 function clearText() {
     city.value = onfocus = this.value = ""
