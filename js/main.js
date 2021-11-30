@@ -31,7 +31,7 @@ async function getWeatherFromData() {
     let location = city.value
     try {
         data = await fetchData(location)
-        console.log(data)
+        clearText()
         contentDiv.innerHTML += `
         <article>
         <h2>The weather in ${data.list[0].name}:</h2>
@@ -45,9 +45,6 @@ async function getWeatherFromData() {
         console.log(error)
     }
 }
-
-try {
- 
-}catch(error) {
-    console.log(error)
+function clearText() {
+    city.value = onfocus = this.value = ""
 }
