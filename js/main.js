@@ -21,15 +21,15 @@ async function getWeatherFromData(data) {
 }
 async function fetchData(location) {
    if (changeMeasurementType() == "metric") {
-        let response = await fetch(`http://api.openweathermap.org/data/2.5/find?q=${location}&units=metric&appid=4423845cee6ed32c6e6b2e17f19bbdc9`)
+        let response = await fetch(`https://api.openweathermap.org/data/2.5/find?q=${location}&units=metric&appid=4423845cee6ed32c6e6b2e17f19bbdc9`)
         let data = await response.json();
         return data
     }else if (changeMeasurementType() == "imperial"){
-        let response = await fetch(`http://api.openweathermap.org/data/2.5/find?q=${location}&units=imperial&appid=4423845cee6ed32c6e6b2e17f19bbdc9`)
+        let response = await fetch(`https://api.openweathermap.org/data/2.5/find?q=${location}&units=imperial&appid=4423845cee6ed32c6e6b2e17f19bbdc9`)
         let data = await response.json();
         return data
     } else {
-        let response = await fetch(`http://api.openweathermap.org/data/2.5/find?q=${location}&appid=4423845cee6ed32c6e6b2e17f19bbdc9`)
+        let response = await fetch(`https://api.openweathermap.org/data/2.5/find?q=${location}&appid=4423845cee6ed32c6e6b2e17f19bbdc9`)
         let data = await response.json();
         return data
     }
